@@ -1,11 +1,14 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useAnimation } from "framer-motion";
 import Button from "@/components/ui/Button";
-import Image from "next/image";
+import InteractiveCard from "@/components/ui/InteractiveCard";
 
 const HeroSection = () => {
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const spotlightAnimation = useAnimation();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -29,15 +32,108 @@ const HeroSection = () => {
     },
   };
 
+  // Animate the spotlight element
+  useEffect(() => {
+    const animateSpotlight = async () => {
+      while (true) {
+        // Complex movement pattern covering the entire hero
+        await spotlightAnimation.start({
+          left: '85%', 
+          top: '15%',
+          width: '45vh',
+          height: '45vh',
+          transition: { 
+            duration: 4.5, 
+            ease: [0.45, 0.05, 0.55, 0.95] // Custom easing for more organic movement
+          }
+        });
+        
+        await spotlightAnimation.start({
+          left: '10%', 
+          top: '75%',
+          width: '40vh',
+          height: '40vh',
+          transition: { 
+            duration: 5, 
+            ease: [0.45, 0.05, 0.55, 0.95]
+          }
+        });
+        
+        await spotlightAnimation.start({
+          left: '65%', 
+          top: '85%',
+          width: '42vh',
+          height: '42vh',
+          transition: { 
+            duration: 4.2, 
+            ease: [0.45, 0.05, 0.55, 0.95]
+          }
+        });
+
+        await spotlightAnimation.start({
+          left: '25%', 
+          top: '5%',
+          width: '43vh',
+          height: '43vh',
+          transition: { 
+            duration: 4.8, 
+            ease: [0.45, 0.05, 0.55, 0.95]
+          }
+        });
+
+        await spotlightAnimation.start({
+          left: '90%', 
+          top: '60%',
+          width: '41vh',
+          height: '41vh',
+          transition: { 
+            duration: 4.6, 
+            ease: [0.45, 0.05, 0.55, 0.95]
+          }
+        });
+
+        await spotlightAnimation.start({
+          left: '5%', 
+          top: '40%',
+          width: '44vh',
+          height: '44vh',
+          transition: { 
+            duration: 5.2, 
+            ease: [0.45, 0.05, 0.55, 0.95]
+          }
+        });
+      }
+    };
+    
+    animateSpotlight();
+  }, [spotlightAnimation]);
+
+  // These are placeholder images - replace with actual uploaded images
+  const heroImages = [
+    "/images/winslow.webp",
+    "/images/zahra.webp",
+    "/images/aerii.webp",
+    "/images/luscerro.webp",
+  ];
+
   return (
-    <section className="min-h-screen relative flex items-center pt-20 pb-32 bg-black overflow-hidden">
-      {/* Background abstract elements */}
+    <section className="min-h-screen relative flex items-center pt-20 pb-32 bg-black overflow-hidden -mt-24">
+      {/* Background abstract elements - animated spotlight */}
       <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-[#D4AF37] rounded-full filter blur-[100px]" />
-        <div className="absolute bottom-1/3 left-1/3 w-60 h-60 bg-white rounded-full filter blur-[120px]" />
+        <motion.div 
+          ref={spotlightRef}
+          animate={spotlightAnimation}
+          initial={{ 
+            top: '15%', 
+            left: '85%', 
+            width: '45vh', 
+            height: '45vh' 
+          }}
+          className="absolute bg-white rounded-full filter blur-[80px]" 
+        />
       </div>
 
-      <div className="container-wrapper relative z-10">
+      <div className="container-wrapper relative z-10 pt-32 md:pt-36">
         <motion.div
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
           variants={containerVariants}
@@ -72,17 +168,13 @@ const HeroSection = () => {
           
           <motion.div
             variants={itemVariants}
-            className="relative aspect-square w-full max-w-xl mx-auto lg:ml-auto rounded-sm overflow-hidden"
+            className="relative w-full max-w-xl mx-auto lg:ml-auto"
           >
-            <Image
-              src="/images/hero-image.jpg"
-              alt="ELUX.DEV Luxury Web Design"
-              fill
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
+            <InteractiveCard
+              images={heroImages}
+              alt="ELUX.DEV Featured Projects"
+              className="opacity-100"
             />
-            <div className="absolute inset-0 bg-black/30 mix-blend-overlay" />
           </motion.div>
         </motion.div>
       </div>

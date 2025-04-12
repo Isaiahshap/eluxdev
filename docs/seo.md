@@ -1,0 +1,189 @@
+# Keyword Tails Per Page:
+
+## /
+ *Main Keyword:*
+   - luxury website
+ 
+*Supporting Keywords:*
+   - luxury web design
+   - luxury websites
+
+## /about
+ *Main Keyword:*
+   - luxury website designs
+ 
+*Supporting Keywords:*
+   - luxurious websites
+   - luxury websites design
+
+## /contact
+*Main Keyword:*
+   - high end website
+
+*Supporting Keywords:*
+   - luxurious web design
+   - web design luxury
+
+## /services/design
+
+*Main Keyword:*
+   - luxury web design
+
+*Supporting Keywords:*
+   - good designer websites
+   - good web designer
+
+## /services/development 
+*Main Keyword:*
+   - high end web development
+
+*Supporting Keywords:*
+   - sleek websites
+   - luxury web development
+
+## /services/seo
+*Main Keyword:*
+   - search optimization services
+
+*Supporting Keywords:*
+   - seo optimization services
+   - search engine optimisation
+
+## /services/brand
+*Main Keyword:*
+   - posh websites
+
+*Supporting Keywords:*
+   - posh website
+   - luxury branding
+
+## /services/leads
+*Main Keyword:*
+   - lead generation companies
+
+*Supporting Keywords:*
+   - luxury lead generation
+   - lead generation services
+
+## /services/hosting
+*Main Keyword:*
+   - good designer websites
+
+*Supporting Keywords:*
+   - good web designer
+   - good web design
+
+## /services/concierge
+*Main Keyword:*
+   - luxury concierge
+
+*Supporting Keywords:*
+   - luxury concierge services
+   - luxury concierge service
+
+
+## /industries/hospitality
+*Main Keyword:*
+   - hospitality marketing agency
+
+*Supporting Keywords:*
+   - hospitality marketing companies
+   - web design for hotels
+
+## /industries/retail
+*Main Keyword:*
+   - retail marketing
+
+*Supporting Keywords:*
+   - retail marketing agency
+   - retail website
+
+## /industries/aviation
+*Main Keyword:*
+   - aviation websites
+
+*Supporting Keywords:*
+   - aviation branding
+   - aviation marketing
+
+## /industries/yachting
+*Main Keyword:*
+   - yacht websites
+
+*Supporting Keywords:*
+   - websites to sell boats
+   - boat selling websites
+
+## /industries/art
+*Main Keyword:*
+   - art websites
+
+*Supporting Keywords:*
+   - art portfolio websites
+   - art gallery website
+
+## /locations/new-york
+*Main Keyword:*
+   - luxury web design New York
+
+*Supporting Keywords:*
+   - Manhattan luxury websites
+   - NYC web design agency
+   - high-end web development New York
+
+## /locations/los-angeles
+*Main Keyword:*
+   - luxury web design Los Angeles
+
+*Supporting Keywords:*
+   - Beverly Hills luxury websites 
+   - LA web design agency
+   - high-end web development California
+
+## /locations/miami
+*Main Keyword:*
+   - luxury web design Miami
+
+*Supporting Keywords:*
+   - South Beach luxury websites
+   - Miami web design agency
+   - high-end web development Florida
+
+## /locations/london
+*Main Keyword:*
+   - luxury web design London
+
+*Supporting Keywords:*
+   - premium London websites
+   - UK luxury web design
+   - Mayfair web development
+
+## /locations/paris
+*Main Keyword:*
+   - luxury web design Paris
+
+*Supporting Keywords:*
+   - exclusive Paris websites
+   - French luxury web design
+   - high-end web development Paris
+
+## /locations/dubai
+*Main Keyword:*
+   - luxury web design Dubai
+
+*Supporting Keywords:*
+   - premium Dubai websites
+   - UAE luxury web design
+   - exclusive web development Dubai
+
+## /locations/monaco
+*Main Keyword:*
+   - luxury web design Monaco
+
+*Supporting Keywords:*
+   - Monte Carlo web design
+   - Monaco digital agency
+   - premium web development Monaco
+
+
+(Add more here)

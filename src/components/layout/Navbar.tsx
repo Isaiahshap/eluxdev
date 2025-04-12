@@ -132,8 +132,7 @@ export const Navbar = () => {
       >
         <Link href="/" className="z-50">
           <h1 className="font-outfit font-extrabold text-xl tracking-tighter uppercase">
-            <span className="text-white">ELUX</span>
-            <span className="text-[#D4AF37]">.DEV</span>
+            <span className="text-white">ELUX.DEV</span>
           </h1>
         </Link>
 
@@ -143,7 +142,9 @@ export const Navbar = () => {
             <Link 
               key={href} 
               href={href}
-              className={`nav-link hover:text-[#D4AF37] ${pathname === href ? "text-[#D4AF37]" : ""}`}
+              className={`nav-link hover:text-[#D4AF37] ${
+                pathname === href && href !== "/" ? "text-[#D4AF37]" : ""
+              }`}
             >
               {label}
             </Link>
@@ -195,7 +196,7 @@ export const Navbar = () => {
                     <Link
                       href={href}
                       className={`text-2xl font-outfit uppercase tracking-widest hover:text-[#D4AF37] ${
-                        pathname === href ? "text-[#D4AF37]" : ""
+                        pathname === href && href !== "/" ? "text-[#D4AF37]" : ""
                       }`}
                       onClick={() => setIsOpen(false)}
                     >

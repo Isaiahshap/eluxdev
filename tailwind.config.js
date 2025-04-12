@@ -54,7 +54,31 @@ module.exports = {
         "in-silk": "cubic-bezier(0.22, 1, 0.36, 1)",
         "out-silk": "cubic-bezier(0.76, 0, 0.24, 1)",
       },
+      perspective: {
+        'none': 'none',
+        '500': '500px',
+        '1000': '1000px',
+        '2000': '2000px',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function({ addUtilities }) {
+      const newUtilities = {
+        '.perspective-none': {
+          perspective: 'none',
+        },
+        '.perspective-500': {
+          perspective: '500px',
+        },
+        '.perspective-1000': {
+          perspective: '1000px',
+        },
+        '.perspective-2000': {
+          perspective: '2000px',
+        },
+      }
+      addUtilities(newUtilities)
+    }
+  ],
 }; 
