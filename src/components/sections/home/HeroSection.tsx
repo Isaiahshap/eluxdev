@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { motion, Variants } from "framer-motion";
 import Button from "@/components/ui/Button";
 import InteractiveCard from "@/components/ui/InteractiveCard";
 
 const HeroSection = () => {
-  const spotlightRef = useRef<HTMLDivElement>(null);
-  const spotlightAnimation = useAnimation();
+  const [isClient, setIsClient] = useState(false);
+  
+  // Enable client-side animations only after component has mounted
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -32,81 +36,23 @@ const HeroSection = () => {
     },
   };
 
-  // Animate the spotlight element
-  useEffect(() => {
-    const animateSpotlight = async () => {
-      while (true) {
-        // Complex movement pattern covering the entire hero
-        await spotlightAnimation.start({
-          left: '85%', 
-          top: '15%',
-          width: '45vh',
-          height: '45vh',
-          transition: { 
-            duration: 4.5, 
-            ease: [0.45, 0.05, 0.55, 0.95] // Custom easing for more organic movement
-          }
-        });
-        
-        await spotlightAnimation.start({
-          left: '10%', 
-          top: '75%',
-          width: '40vh',
-          height: '40vh',
-          transition: { 
-            duration: 5, 
-            ease: [0.45, 0.05, 0.55, 0.95]
-          }
-        });
-        
-        await spotlightAnimation.start({
-          left: '65%', 
-          top: '85%',
-          width: '42vh',
-          height: '42vh',
-          transition: { 
-            duration: 4.2, 
-            ease: [0.45, 0.05, 0.55, 0.95]
-          }
-        });
-
-        await spotlightAnimation.start({
-          left: '25%', 
-          top: '5%',
-          width: '43vh',
-          height: '43vh',
-          transition: { 
-            duration: 4.8, 
-            ease: [0.45, 0.05, 0.55, 0.95]
-          }
-        });
-
-        await spotlightAnimation.start({
-          left: '90%', 
-          top: '60%',
-          width: '41vh',
-          height: '41vh',
-          transition: { 
-            duration: 4.6, 
-            ease: [0.45, 0.05, 0.55, 0.95]
-          }
-        });
-
-        await spotlightAnimation.start({
-          left: '5%', 
-          top: '40%',
-          width: '44vh',
-          height: '44vh',
-          transition: { 
-            duration: 5.2, 
-            ease: [0.45, 0.05, 0.55, 0.95]
-          }
-        });
+  // Define spotlight animation keyframes
+  const spotlightVariants: Variants = {
+    animate: {
+      left: ['85%', '10%', '65%', '25%', '90%', '5%', '85%'],
+      top: ['15%', '75%', '85%', '5%', '60%', '40%', '15%'],
+      width: ['45vh', '40vh', '42vh', '43vh', '41vh', '44vh', '45vh'],
+      height: ['45vh', '40vh', '42vh', '43vh', '41vh', '44vh', '45vh'],
+      opacity: [1, 1, 1, 1, 1, 1, 1],
+      transition: {
+        duration: 30,
+        times: [0, 0.17, 0.33, 0.5, 0.67, 0.83, 1],
+        ease: "linear",
+        repeat: Infinity,
+        repeatType: "loop" as const
       }
-    };
-    
-    animateSpotlight();
-  }, [spotlightAnimation]);
+    }
+  };
 
   // These are placeholder images - replace with actual uploaded images
   const heroImages = [
@@ -120,17 +66,20 @@ const HeroSection = () => {
     <section className="min-h-screen relative flex items-center pt-20 pb-32 bg-black overflow-hidden -mt-24">
       {/* Background abstract elements - animated spotlight */}
       <div className="absolute inset-0 z-0 opacity-20">
-        <motion.div 
-          ref={spotlightRef}
-          animate={spotlightAnimation}
-          initial={{ 
-            top: '15%', 
-            left: '85%', 
-            width: '45vh', 
-            height: '45vh' 
-          }}
-          className="absolute bg-white rounded-full filter blur-[80px]" 
-        />
+        {isClient && (
+          <motion.div 
+            initial={{ 
+              top: '15%', 
+              left: '85%', 
+              width: '45vh', 
+              height: '45vh',
+              opacity: 0
+            }}
+            animate="animate"
+            variants={spotlightVariants}
+            className="absolute bg-white rounded-full filter blur-[80px]" 
+          />
+        )}
       </div>
 
       <div className="container-wrapper relative z-10 pt-32 md:pt-36">
