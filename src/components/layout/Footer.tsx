@@ -131,11 +131,11 @@ export const Footer = () => {
   return (
     <footer className="relative">
       {/* Diagonal cut top section */}
-      <div className="w-full h-16 bg-black relative overflow-hidden">
+      <div className="w-full h-12 sm:h-16 bg-black relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-[#080808] transform -skew-y-2 origin-top-right"></div>
       </div>
       
-      <div className="bg-gradient-to-b from-[#080808] to-black pt-16 pb-10 relative overflow-hidden">
+      <div className="bg-gradient-to-b from-[#080808] to-black pt-12 sm:pt-16 pb-8 sm:pb-10 relative overflow-hidden">
         {/* Gold accent line */}
         <div className="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent"></div>
         
@@ -163,9 +163,9 @@ export const Footer = () => {
           {/* Logo and tagline section */}
           <motion.div 
             variants={itemVariants} 
-            className="flex flex-col lg:flex-row justify-between items-center mb-20"
+            className="flex flex-col lg:flex-row justify-between items-center mb-12 sm:mb-20 text-center lg:text-left"
           >
-            <div className="mb-8 lg:mb-0">
+            <div className="mb-6 lg:mb-0">
               <Link href="/" className="inline-block">
                 <motion.div 
                   className="relative"
@@ -179,7 +179,7 @@ export const Footer = () => {
                     backgroundClip: "text",
                   }}
                 >
-                  <h2 className="font-outfit font-extrabold text-4xl tracking-tighter uppercase">
+                  <h2 className="font-outfit font-extrabold text-3xl sm:text-4xl tracking-tighter uppercase">
                     <span className="text-white">ELUX</span>
                     <span className="text-[#D4AF37]">.DEV</span>
                   </h2>
@@ -188,27 +188,27 @@ export const Footer = () => {
             </div>
             
             <div className="text-center lg:text-right">
-              <p className="text-white/80 font-light text-lg max-w-md">
+              <p className="text-white/80 font-light text-base sm:text-lg max-w-md">
                 Creating exceptional digital experiences for those who demand nothing but perfection.
               </p>
             </div>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-12">
             {/* Main content columns */}
-            <motion.div variants={itemVariants} className="lg:col-span-3 space-y-8">
+            <motion.div variants={itemVariants} className="lg:col-span-3 space-y-6 sm:space-y-8">
               <div>
-                <h3 className="font-outfit text-white text-base uppercase tracking-wider mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
+                <h3 className="font-outfit text-white text-sm sm:text-base uppercase tracking-wider mb-4 sm:mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
                   About Us
                 </h3>
-                <p className="text-white/70 mb-6 font-light">
+                <p className="text-white/70 mb-6 font-light text-sm sm:text-base">
                   Elite digital experiences for luxury brands and high-net-worth individuals.
                   Meticulously crafted websites with a relentless focus on elegance and performance.
                 </p>
               </div>
               
               <div>
-                <h3 className="font-outfit text-white text-base uppercase tracking-wider mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
+                <h3 className="font-outfit text-white text-sm sm:text-base uppercase tracking-wider mb-4 sm:mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
                   Connect
                 </h3>
                 <div className="flex space-x-5">
@@ -259,10 +259,10 @@ export const Footer = () => {
 
             {/* Quick Links */}
             <motion.div variants={itemVariants} className="lg:col-span-2">
-              <h3 className="font-outfit text-white text-base uppercase tracking-wider mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
+              <h3 className="font-outfit text-white text-sm sm:text-base uppercase tracking-wider mb-4 sm:mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
                 Quick Links
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base">
                 {navLinks.map(({ href, label }) => (
                   <li key={href}>
                     <Link 
@@ -278,12 +278,12 @@ export const Footer = () => {
 
             {/* Locations */}
             <motion.div variants={itemVariants} className="lg:col-span-3">
-              <h3 className="font-outfit text-white text-base uppercase tracking-wider mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
+              <h3 className="font-outfit text-white text-sm sm:text-base uppercase tracking-wider mb-4 sm:mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
                 Global Presence
               </h3>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-5">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:gap-y-5">
                 {locationGroups.map((group, groupIndex) => (
-                  <div key={groupIndex} className="space-y-2">
+                  <div key={groupIndex} className="space-y-1.5 sm:space-y-2">
                     <p className="text-[#D4AF37] text-xs uppercase tracking-wider font-medium mb-1">
                       {group.region}
                     </p>
@@ -292,7 +292,7 @@ export const Footer = () => {
                         <li key={cityIndex}>
                           <Link 
                             href={city.href}
-                            className="text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300 inline-block"
+                            className="text-xs sm:text-sm text-white/70 hover:text-[#D4AF37] transition-colors duration-300 inline-block"
                           >
                             {city.name}
                           </Link>
@@ -306,7 +306,7 @@ export const Footer = () => {
 
             {/* Contact Form */}
             <motion.div variants={itemVariants} className="lg:col-span-4">
-              <h3 className="font-outfit text-white text-base uppercase tracking-wider mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
+              <h3 className="font-outfit text-white text-sm sm:text-base uppercase tracking-wider mb-4 sm:mb-5 relative pl-3 border-l-2 border-[#D4AF37]">
                 Get In Touch
               </h3>
               
@@ -316,14 +316,14 @@ export const Footer = () => {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
-                    className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-sm py-4 px-5 text-center"
+                    className="bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-sm py-3 sm:py-4 px-4 sm:px-5 text-center"
                   >
-                    <div className="inline-block mb-3">
-                      <svg className="w-10 h-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div className="inline-block mb-2 sm:mb-3">
+                      <svg className="w-8 h-8 sm:w-10 sm:h-10 text-[#D4AF37]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <p className="text-white">Thank you for your message. We&apos;ll be in touch soon.</p>
+                    <p className="text-white text-sm sm:text-base">Thank you for your message. We&apos;ll be in touch soon.</p>
                   </motion.div>
                 ) : (
                   <motion.form 
@@ -331,7 +331,7 @@ export const Footer = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onSubmit={handleSubmit} 
-                    className="space-y-4"
+                    className="space-y-3 sm:space-y-4"
                   >
                     <div>
                       <input
@@ -340,7 +340,7 @@ export const Footer = () => {
                         value={formState.name}
                         onChange={handleInputChange}
                         placeholder="Your Name"
-                        className={`w-full bg-white/5 backdrop-blur-sm border ${formStatus.error && !formState.name ? 'border-red-500' : 'border-white/10'} py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors`}
+                        className={`w-full bg-white/5 backdrop-blur-sm border text-sm sm:text-base ${formStatus.error && !formState.name ? 'border-red-500' : 'border-white/10'} py-2.5 sm:py-3 px-3 sm:px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors`}
                         required
                       />
                     </div>
@@ -351,7 +351,7 @@ export const Footer = () => {
                         value={formState.email}
                         onChange={handleInputChange}
                         placeholder="Your Email"
-                        className={`w-full bg-white/5 backdrop-blur-sm border ${formStatus.error && !formState.email ? 'border-red-500' : 'border-white/10'} py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors`}
+                        className={`w-full bg-white/5 backdrop-blur-sm border text-sm sm:text-base ${formStatus.error && !formState.email ? 'border-red-500' : 'border-white/10'} py-2.5 sm:py-3 px-3 sm:px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors`}
                         required
                       />
                     </div>
@@ -362,7 +362,7 @@ export const Footer = () => {
                         onChange={handleInputChange}
                         placeholder="Your Message"
                         rows={3}
-                        className={`w-full bg-white/5 backdrop-blur-sm border ${formStatus.error && !formState.message ? 'border-red-500' : 'border-white/10'} py-3 px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors resize-none`}
+                        className={`w-full bg-white/5 backdrop-blur-sm border text-sm sm:text-base ${formStatus.error && !formState.message ? 'border-red-500' : 'border-white/10'} py-2.5 sm:py-3 px-3 sm:px-4 text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4AF37] transition-colors resize-none`}
                         required
                       ></textarea>
                     </div>
@@ -375,14 +375,14 @@ export const Footer = () => {
                         type="submit" 
                         variant="primary" 
                         fullWidth
-                        className="py-3 uppercase tracking-wider text-sm"
+                        className="py-2.5 sm:py-3 uppercase tracking-wider text-xs sm:text-sm"
                       >
                         Send Message
                       </Button>
                     </motion.div>
                     
                     {formStatus.error && (
-                      <p className="text-red-400 text-sm">Please fill in all required fields.</p>
+                      <p className="text-red-400 text-xs sm:text-sm">Please fill in all required fields.</p>
                     )}
                   </motion.form>
                 )}
@@ -391,9 +391,9 @@ export const Footer = () => {
           </div>
 
           {/* Footer bottom section with animated gradient border */}
-          <div className="relative mt-20">
+          <div className="relative mt-12 sm:mt-20">
             <motion.div 
-              className="h-px w-full mb-8 overflow-hidden"
+              className="h-px w-full mb-6 sm:mb-8 overflow-hidden"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
@@ -409,25 +409,25 @@ export const Footer = () => {
             
             <motion.div
               variants={itemVariants}
-              className="flex flex-col md:flex-row justify-between items-center"
+              className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0"
             >
-              <p className="text-white/40 text-sm">
+              <p className="text-white/40 text-xs sm:text-sm text-center md:text-left">
                 &copy; {new Date().getFullYear()} ELUX.DEV. All rights reserved.
               </p>
-              <div className="mt-4 md:mt-0">
-                <ul className="flex space-x-8">
+              <div>
+                <ul className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-8">
                   <li>
-                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-sm">
+                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-xs sm:text-sm">
                       Privacy Policy
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-sm">
+                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-xs sm:text-sm">
                       Terms of Service
                     </a>
                   </li>
                   <li>
-                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-sm">
+                    <a href="#" className="text-white/40 hover:text-[#D4AF37] transition-colors duration-300 text-xs sm:text-sm">
                       Cookies
                     </a>
                   </li>

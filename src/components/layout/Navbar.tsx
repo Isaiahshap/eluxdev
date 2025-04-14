@@ -69,13 +69,33 @@ export const Navbar = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = "hidden";
+      // Store the current scroll position
+      const scrollY = window.scrollY;
+      
+      // Add scroll lock to body with position fixed
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
     } else {
-      document.body.style.overflow = "auto";
+      // Restore scroll position when menu is closed
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
+      }
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      // Cleanup scroll lock on unmount
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
@@ -135,7 +155,7 @@ export const Navbar = () => {
 
   const hamburgerTopVariants = {
     closed: { rotate: 0, y: 0 },
-    open: { rotate: 45, y: 5 },
+    open: { rotate: 45, y: 7 },
   };
 
   const hamburgerMiddleVariants = {
@@ -145,7 +165,7 @@ export const Navbar = () => {
 
   const hamburgerBottomVariants = {
     closed: { rotate: 0, y: 0 },
-    open: { rotate: -45, y: -5 },
+    open: { rotate: -45, y: -7 },
   };
 
   // Helper function to determine if a nav item should be highlighted
@@ -162,12 +182,12 @@ export const Navbar = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 ${
+      className={`fixed top-0 left-0 w-full z-[9990] ${
         scrolled ? "bg-black/90 backdrop-blur" : "bg-transparent"
       } transition-all duration-300`}
     >
       <motion.nav
-        className="container-wrapper flex justify-between items-center h-20 md:h-24"
+        className="container-wrapper flex justify-between items-center h-20 lg:h-24"
         variants={navbarVariants}
         initial="initial"
         animate="animate"
@@ -179,7 +199,7 @@ export const Navbar = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden lg:flex items-center space-x-8">
           {navLinks.map(({ href, label, hasDropdown }) => (
             <div 
               key={href} 
@@ -226,47 +246,59 @@ export const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden z-50 flex flex-col items-center justify-center w-8 h-8"
+          className="lg:hidden z-[10000] flex flex-col items-center justify-center w-8 h-8 relative"
           onClick={toggleMenu}
           aria-label={isOpen ? "Close Menu" : "Open Menu"}
         >
-          <motion.span
-            className="block w-6 h-0.5 bg-white mb-1.5"
-            variants={hamburgerTopVariants}
-            animate={isOpen ? "open" : "closed"}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="block w-6 h-0.5 bg-white mb-1.5"
-            variants={hamburgerMiddleVariants}
-            animate={isOpen ? "open" : "closed"}
-            transition={{ duration: 0.3 }}
-          />
-          <motion.span
-            className="block w-6 h-0.5 bg-white"
-            variants={hamburgerBottomVariants}
-            animate={isOpen ? "open" : "closed"}
-            transition={{ duration: 0.3 }}
-          />
+          <div className="w-6 h-4 relative flex flex-col justify-between">
+            <motion.span
+              className="absolute top-0 block w-6 h-0.5 bg-white transform-gpu"
+              variants={hamburgerTopVariants}
+              animate={isOpen ? "open" : "closed"}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="absolute top-1/2 -mt-[1px] block w-6 h-0.5 bg-white transform-gpu"
+              variants={hamburgerMiddleVariants}
+              animate={isOpen ? "open" : "closed"}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.span
+              className="absolute bottom-0 block w-6 h-0.5 bg-white transform-gpu"
+              variants={hamburgerBottomVariants}
+              animate={isOpen ? "open" : "closed"}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
         </button>
 
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="fixed inset-0 bg-black flex flex-col items-center justify-center z-40"
+              className="fixed inset-0 bg-black flex flex-col items-center justify-center z-[9999]"
+              style={{ 
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: '100svh',
+                width: '100vw',
+                overflowY: 'auto'
+              }}
               variants={menuVariants}
               initial="closed"
               animate="open"
               exit="closed"
             >
-              <div className="flex flex-col items-center space-y-6 w-full max-w-sm px-6">
+              <div className="flex flex-col items-center space-y-6 w-full max-w-lg px-6 py-20">
                 {navLinks.map(({ href, label, hasDropdown }) => (
                   <motion.div key={href} variants={linkVariants} className="flex flex-col items-center w-full">
                     <div className="flex items-center justify-center">
                       <Link
                         href={href}
-                        className={`text-2xl font-outfit uppercase tracking-widest hover:text-[#D4AF37] ${
+                        className={`text-xl sm:text-2xl font-outfit uppercase tracking-widest hover:text-[#D4AF37] ${
                           isActive(href) ? "text-[#D4AF37]" : ""
                         }`}
                         onClick={() => !hasDropdown && setIsOpen(false)}
@@ -284,8 +316,8 @@ export const Navbar = () => {
                         >
                           <svg 
                             xmlns="http://www.w3.org/2000/svg" 
-                            width="10" 
-                            height="6" 
+                            width="12" 
+                            height="8" 
                             viewBox="0 0 10 6" 
                             fill="none" 
                             className={`transition-transform duration-300 ${activeDropdown === href.substring(1) ? "rotate-180" : ""}`}
@@ -306,8 +338,8 @@ export const Navbar = () => {
                     )}
                   </motion.div>
                 ))}
-                <motion.div variants={linkVariants} className="mt-8">
-                  <Button href="/contact" variant="primary">
+                <motion.div variants={linkVariants} className="mt-8 w-full sm:w-auto">
+                  <Button href="/contact" variant="primary" className="w-full sm:w-auto text-center">
                     Contact
                   </Button>
                 </motion.div>

@@ -16,7 +16,7 @@ const locationData = [
       {
         city: "New York",
         country: "United States",
-        image: "/images/locations/new-york.jpg",
+        image: "/images/locations/new-york.webp",
         href: "/locations/new-york",
       },
       {

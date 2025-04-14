@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 
@@ -19,16 +18,16 @@ const ContactSection = () => {
     message: false
   });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
+  const [formStatus, setFormStatus] = useState({
+    isSubmitting: false,
+    isSuccess: false,
+    isError: false,
+    errorMessage: ""
+  });
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,25 +44,77 @@ const ContactSection = () => {
         [name]: false
       }));
     }
+
+    // Reset form status on new changes
+    if (formStatus.isSuccess || formStatus.isError) {
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: false,
+        errorMessage: ""
+      });
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simple validation
+    // Reset form status
+    setFormStatus({
+      isSubmitting: true,
+      isSuccess: false,
+      isError: false,
+      errorMessage: ""
+    });
+    
+    // Comprehensive validation
     const errors = {
       name: formState.name.trim() === "",
-      email: formState.email.trim() === "",
+      email: formState.email.trim() === "" || !validateEmail(formState.email),
       message: formState.message.trim() === ""
     };
     
     if (errors.name || errors.email || errors.message) {
       setFormErrors(errors);
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: true,
+        errorMessage: "Please fill out all required fields correctly."
+      });
       return;
     }
     
-    // Will be implemented with backend later
-    console.log("Form submitted", formState);
+    try {
+      // In the future, this will be connected to Resend API
+      // Mock successful submission for now
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log("Form submitted successfully", formState);
+      
+      // Reset form after successful submission
+      setFormState({
+        name: "",
+        email: "",
+        phone: "",
+        message: ""
+      });
+      
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: true,
+        isError: false,
+        errorMessage: ""
+      });
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setFormStatus({
+        isSubmitting: false,
+        isSuccess: false,
+        isError: true,
+        errorMessage: "An error occurred while submitting the form. Please try again later."
+      });
+    }
   };
 
   return (
@@ -83,21 +134,8 @@ const ContactSection = () => {
       
       <div className="container-wrapper relative z-10">
         <div className="max-w-4xl mx-auto backdrop-blur-sm bg-black/20 p-8 md:p-12 rounded-sm border border-[#D4AF37]/10">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.1,
-                }
-              }
-            }}
-          >
-            <motion.div variants={itemVariants} className="text-center mb-16">
+          <div>
+            <div className="text-center mb-16">
               <h2 className="text-4xl md:text-6xl font-outfit font-extralight leading-tight mb-6">
                 Begin Your <span className="text-[#D4AF37] font-light">Luxury</span> Digital Journey
               </h2>
@@ -105,10 +143,23 @@ const ContactSection = () => {
               <p className="font-inter font-light text-white max-w-2xl mx-auto text-lg">
                 Contact us to discuss your project requirements and discover how ELUX.DEV can transform your digital presence.
               </p>
-            </motion.div>
+            </div>
 
-            <motion.form 
-              variants={itemVariants}
+            {formStatus.isSuccess && (
+              <div className="bg-green-900/40 border border-green-500/50 text-white p-6 mb-8 text-center rounded-sm">
+                <h3 className="text-xl font-outfit mb-2">Thank You For Your Inquiry</h3>
+                <p>We have received your message and will contact you shortly.</p>
+              </div>
+            )}
+
+            {formStatus.isError && !formErrors.name && !formErrors.email && !formErrors.message && (
+              <div className="bg-red-900/40 border border-red-500/50 text-white p-6 mb-8 text-center rounded-sm">
+                <h3 className="text-xl font-outfit mb-2">Submission Error</h3>
+                <p>{formStatus.errorMessage}</p>
+              </div>
+            )}
+
+            <form 
               onSubmit={handleSubmit}
               className="grid grid-cols-1 md:grid-cols-2 gap-8"
               aria-label="Contact form"
@@ -128,6 +179,7 @@ const ContactSection = () => {
                       className={`w-full bg-black/40 backdrop-blur-sm border ${formErrors.name ? 'border-red-500' : 'border-white/30'} py-4 px-5 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-colors`}
                       aria-required="true"
                       aria-invalid={formErrors.name}
+                      disabled={formStatus.isSubmitting}
                     />
                     {formErrors.name && (
                       <span className="text-red-400 text-sm block mt-2" role="alert">Please enter your name</span>
@@ -149,9 +201,12 @@ const ContactSection = () => {
                       className={`w-full bg-black/40 backdrop-blur-sm border ${formErrors.email ? 'border-red-500' : 'border-white/30'} py-4 px-5 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-colors`}
                       aria-required="true"
                       aria-invalid={formErrors.email}
+                      disabled={formStatus.isSubmitting}
                     />
                     {formErrors.email && (
-                      <span className="text-red-400 text-sm block mt-2" role="alert">Please enter your email</span>
+                      <span className="text-red-400 text-sm block mt-2" role="alert">
+                        {formState.email.trim() === "" ? "Please enter your email" : "Please enter a valid email address"}
+                      </span>
                     )}
                   </div>
                 </div>
@@ -168,6 +223,7 @@ const ContactSection = () => {
                     onChange={handleInputChange}
                     className="w-full bg-black/40 backdrop-blur-sm border border-white/30 py-4 px-5 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-colors"
                     aria-required="false"
+                    disabled={formStatus.isSubmitting}
                   />
                 </div>
               </div>
@@ -186,6 +242,7 @@ const ContactSection = () => {
                     className={`w-full h-[calc(100%-24px)] bg-black/40 backdrop-blur-sm border ${formErrors.message ? 'border-red-500' : 'border-white/30'} py-4 px-5 rounded-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-colors resize-none`}
                     aria-required="true"
                     aria-invalid={formErrors.message}
+                    disabled={formStatus.isSubmitting}
                   ></textarea>
                   {formErrors.message && (
                     <span className="text-red-400 text-sm block mt-2" role="alert">Please enter your project details</span>
@@ -197,17 +254,18 @@ const ContactSection = () => {
                 <Button 
                   type="submit" 
                   variant="primary" 
-                  className="px-12 py-4 text-base uppercase tracking-wider hover:scale-105 transition-transform"
+                  className="px-12 py-4 text-base uppercase tracking-wider hover:scale-105 transition-all"
                   aria-label="Submit contact form"
+                  disabled={formStatus.isSubmitting}
                 >
-                  Send Inquiry
+                  {formStatus.isSubmitting ? 'Sending...' : 'Send Inquiry'}
                 </Button>
                 <p className="text-white/60 text-sm mt-4">
                   <span className="text-[#D4AF37]" aria-hidden="true">*</span> Required fields
                 </p>
               </div>
-            </motion.form>
-          </motion.div>
+            </form>
+          </div>
         </div>
       </div>
     </section>

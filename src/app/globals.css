@@ -74,4 +74,12 @@
   
   /* Card shine effect for the interactive card */
 
+  /* Add this class for the radial gradient background used in the About page */
+  .bg-radial-gradient-subtle {
+    background: radial-gradient(
+      circle at center, 
+      rgba(212, 175, 55, 0.05) 0%, 
+      rgba(0, 0, 0, 0) 70%
+    );
+  }
 }

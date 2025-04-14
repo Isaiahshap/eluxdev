@@ -63,7 +63,7 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="min-h-screen relative flex items-center pt-20 pb-32 bg-black overflow-hidden -mt-24">
+    <section className="min-h-[100svh] relative flex items-center pt-16 sm:pt-20 pb-16 sm:pb-32 bg-black overflow-hidden -mt-24">
       {/* Background abstract elements - animated spotlight */}
       <div className="absolute inset-0 z-0 opacity-20">
         {isClient && (
@@ -82,34 +82,34 @@ const HeroSection = () => {
         )}
       </div>
 
-      <div className="container-wrapper relative z-10 pt-32 md:pt-36">
+      <div className="container-wrapper relative z-10 pt-20 sm:pt-24 md:pt-32">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-24 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
           <div>
             <motion.div variants={itemVariants}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-outfit font-extralight leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-outfit font-extralight leading-[1.1] sm:leading-tight">
                 Crafting <span className="font-normal text-[#D4AF37]">Elite</span> Digital Experiences
               </h1>
             </motion.div>
             
             <motion.div variants={itemVariants}>
-              <p className="mt-6 text-xl font-inter font-light leading-relaxed text-white/80">
+              <p className="mt-4 sm:mt-6 text-lg sm:text-xl font-inter font-light leading-relaxed text-white/80 max-w-[90%] sm:max-w-full">
                 ELUX.DEV creates meticulously designed digital platforms for luxury brands, high-net-worth individuals, and exclusive services.
               </p>
             </motion.div>
             
             <motion.div 
               variants={itemVariants} 
-              className="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
+              className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-4 sm:gap-6"
             >
-              <Button href="/contact" variant="primary">
+              <Button href="/contact" variant="primary" className="w-full sm:w-auto text-center">
                 Start a Project
               </Button>
-              <Button href="/work" variant="secondary">
+              <Button href="/work" variant="secondary" className="w-full sm:w-auto text-center">
                 View Portfolio
               </Button>
             </motion.div>
@@ -117,7 +117,7 @@ const HeroSection = () => {
           
           <motion.div
             variants={itemVariants}
-            className="relative w-full max-w-xl mx-auto lg:ml-auto"
+            className="relative w-full max-w-xl mx-auto lg:ml-auto mt-8 lg:mt-0"
           >
             <InteractiveCard
               images={heroImages}

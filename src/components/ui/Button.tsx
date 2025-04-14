@@ -12,6 +12,7 @@ type ButtonProps = {
   onClick?: () => void;
   fullWidth?: boolean;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 };
 
 export const Button = ({
@@ -22,6 +23,7 @@ export const Button = ({
   onClick,
   fullWidth = false,
   type = "button",
+  disabled = false,
 }: ButtonProps) => {
   const baseClasses = "inline-flex items-center justify-center px-8 py-3 text-sm uppercase tracking-widest font-outfit transition-all duration-300 ease-out-silk";
   
@@ -30,15 +32,15 @@ export const Button = ({
     secondary: "bg-transparent border border-white hover:bg-white/5",
   };
   
-  const classes = `${baseClasses} ${variantClasses[variant]} ${fullWidth ? "w-full" : ""} ${className}`;
+  const classes = `${baseClasses} ${variantClasses[variant]} ${fullWidth ? "w-full" : ""} ${disabled ? "opacity-70 cursor-not-allowed" : ""} ${className}`;
   
   const buttonMotion = {
-    whileHover: { scale: 1.02, y: -1 },
-    whileTap: { scale: 0.98 },
+    whileHover: { scale: disabled ? 1 : 1.02, y: disabled ? 0 : -1 },
+    whileTap: { scale: disabled ? 1 : 0.98 },
     transition: { duration: 0.2, ease: [0.76, 0, 0.24, 1] },
   };
 
-  if (href) {
+  if (href && !disabled) {
     return (
       <motion.div {...buttonMotion}>
         <Link href={href} className={classes}>
@@ -48,11 +50,20 @@ export const Button = ({
     );
   }
 
+  if (href && disabled) {
+    return (
+      <div className={classes}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.button
       type={type}
       className={classes}
       onClick={onClick}
+      disabled={disabled}
       {...buttonMotion}
     >
       {children}
